@@ -4,12 +4,12 @@ const success = (
   req: Request,
   res: Response,
   status: number,
-  data: any,
+  data: unknown,
   message?: string,
   options?: { offset?: number; limit?: number; count?: number }
 ) => {
-  let statusCode = status || 200;
-  let statusMessage = message || '';
+  const statusCode = status || 200;
+  const statusMessage = message || '';
 
   res.status(statusCode).json({
     status: status,
@@ -24,10 +24,10 @@ const error = (
   res: Response,
   status: number,
   message?: string,
-  data?: any
+  data?: unknown
 ) => {
-  let statusCode = status || 500;
-  let statusMessage = message || 'Internal server error';
+  const statusCode = status || 500;
+  const statusMessage = message || 'Internal server error';
 
   res.status(statusCode).json({
     status: status,

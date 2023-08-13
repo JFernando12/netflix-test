@@ -22,4 +22,4 @@ app.use('/movie', movieRouter);
 app.use('/platform', platformRouter);
 app.use('/review', reviewRouter);
 
-export default app;
+export { app };

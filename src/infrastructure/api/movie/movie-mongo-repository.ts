@@ -6,12 +6,20 @@ import {
 } from '../../../domain/movie';
 import { Review } from '../../../domain/review';
 import { PlatformMongo } from '../platform/platform-mongo-model';
-import { ReviewMongo } from '../review/review-mongo-model';
+import { ReviewDoc } from '../review/review-mongo-model';
 import { MovieMongo } from './movie-mongo-model';
 
 export class MovieMongoRepository implements MovieRepository {
-  async getMovies(): Promise<Movie[] | null> {
-    const movies = await MovieMongo.find();
+  async getMovies(params: {
+    skip?: number;
+    limit?: number;
+  }): Promise<Movie[] | null> {
+    const defaultSkip = 0;
+    const defaultLimit = 100;
+
+    const movies = await MovieMongo.find()
+      .skip(params.skip || defaultSkip)
+      .limit(params.limit || defaultLimit);
 
     const moviesList = movies.map((movie) => {
       return {
@@ -20,19 +28,9 @@ export class MovieMongoRepository implements MovieRepository {
         slug: movie.slug,
         image: movie.image,
         director: movie.director,
-        platforms: movie.platforms.map((platform) => {
-          return {
-            id: platform.id,
-            icon: platform.icon,
-            title: platform.title,
-            createdAt: platform.createdAt,
-            updatedAt: platform.updatedAt,
-          };
-        }),
+        platforms: movie.platforms as string[],
         score: movie.score,
-        reviews: movie.reviews.map((review) => {
-          return review.id;
-        }),
+        reviews: movie.reviews as string[],
         createdAt: movie.createdAt,
         updatedAt: movie.updatedAt,
       };
@@ -42,7 +40,9 @@ export class MovieMongoRepository implements MovieRepository {
   }
 
   async getMovieById(id: string): Promise<Movie | null> {
-    const movie = await MovieMongo.findById(id);
+    const movie = await MovieMongo.findById(id)
+      .populate('platforms')
+      .populate('reviews');
 
     if (!movie) {
       return null;
@@ -50,9 +50,14 @@ export class MovieMongoRepository implements MovieRepository {
 
     const reviewsByPlatform: { [platform: string]: Review[] } = {};
 
+    const reviews = movie.reviews as ReviewDoc[];
+
     for (const platform of movie.platforms) {
-      const reviews = await ReviewMongo.find({ id: movie.id, platform });
-      reviewsByPlatform[platform.title] = reviews.map((review) => {
+      const currentReviews = reviews.filter(
+        (review) => review.platform.toString() === platform._id.toString()
+      );
+
+      reviewsByPlatform[platform.title] = currentReviews.map((review) => {
         return {
           id: review.id,
           movie: review.movie,
@@ -72,15 +77,7 @@ export class MovieMongoRepository implements MovieRepository {
       slug: movie.slug,
       image: movie.image,
       director: movie.director,
-      platforms: movie.platforms.map((platform) => {
-        return {
-          id: platform.id,
-          icon: platform.icon,
-          title: platform.title,
-          createdAt: platform.createdAt,
-          updatedAt: platform.updatedAt,
-        };
-      }),
+      platforms: movie.platforms as string[],
       score: movie.score,
       reviews: reviewsByPlatform,
       createdAt: movie.createdAt,
@@ -90,16 +87,24 @@ export class MovieMongoRepository implements MovieRepository {
 
   async createMovie(movieCreateDto: MovieCreateDto): Promise<Movie | null> {
     const platforms = await PlatformMongo.find({
-      id: { $in: movieCreateDto.platforms },
+      _id: { $in: movieCreateDto.platforms },
     });
+
+    if (platforms.length !== movieCreateDto.platforms.length) {
+      return null;
+    }
+
+    const slug = movieCreateDto.title
+      .toLocaleLowerCase()
+      .replace(/ /g, '-')
+      .replace(/:/g, '');
 
     const data = {
       title: movieCreateDto.title,
-      slug: movieCreateDto.slug,
+      slug,
       image: movieCreateDto.image,
       director: movieCreateDto.director,
-      platforms: platforms,
-      score: movieCreateDto.score,
+      platforms: movieCreateDto.platforms,
       reviews: [],
     };
 
@@ -112,15 +117,7 @@ export class MovieMongoRepository implements MovieRepository {
       slug: newMovie.slug,
       image: newMovie.image,
       director: newMovie.director,
-      platforms: newMovie.platforms.map((platform) => {
-        return {
-          id: platform.id,
-          icon: platform.icon,
-          title: platform.title,
-          createdAt: platform.createdAt,
-          updatedAt: platform.updatedAt,
-        };
-      }),
+      platforms: newMovie.platforms as string[],
       score: newMovie.score,
       reviews: {},
       createdAt: newMovie.createdAt,
@@ -144,11 +141,9 @@ export class MovieMongoRepository implements MovieRepository {
 
     movie.set({
       title: movieUpdateDto.title,
-      slug: movieUpdateDto.slug,
       image: movieUpdateDto.image,
       director: movieUpdateDto.director,
       platforms: platforms,
-      score: movieUpdateDto.score,
     });
 
     await movie.save();
@@ -159,19 +154,9 @@ export class MovieMongoRepository implements MovieRepository {
       slug: movie.slug,
       image: movie.image,
       director: movie.director,
-      platforms: movie.platforms.map((platform) => {
-        return {
-          id: platform.id,
-          icon: platform.icon,
-          title: platform.title,
-          createdAt: platform.createdAt,
-          updatedAt: platform.updatedAt,
-        };
-      }),
+      platforms: [],
       score: movie.score,
-      reviews: movie.reviews.map((review) => {
-        return review.id;
-      }),
+      reviews: [],
       createdAt: movie.createdAt,
       updatedAt: movie.updatedAt,
     };
@@ -190,19 +175,9 @@ export class MovieMongoRepository implements MovieRepository {
       slug: movie.slug,
       image: movie.image,
       director: movie.director,
-      platforms: movie.platforms.map((platform) => {
-        return {
-          id: platform.id,
-          icon: platform.icon,
-          title: platform.title,
-          createdAt: platform.createdAt,
-          updatedAt: platform.updatedAt,
-        };
-      }),
+      platforms: [],
       score: movie.score,
-      reviews: movie.reviews.map((review) => {
-        return review.id;
-      }),
+      reviews: [],
       createdAt: movie.createdAt,
       updatedAt: movie.updatedAt,
     };
@@ -234,19 +209,9 @@ export class MovieMongoRepository implements MovieRepository {
       slug: newMovie.slug,
       image: newMovie.image,
       director: newMovie.director,
-      platforms: newMovie.platforms.map((platform) => {
-        return {
-          id: platform.id,
-          icon: platform.icon,
-          title: platform.title,
-          createdAt: platform.createdAt,
-          updatedAt: platform.updatedAt,
-        };
-      }),
+      platforms: [],
       score: newMovie.score,
-      reviews: newMovie.reviews.map((review) => {
-        return review.id;
-      }),
+      reviews: [],
       createdAt: newMovie.createdAt,
       updatedAt: newMovie.updatedAt,
     };

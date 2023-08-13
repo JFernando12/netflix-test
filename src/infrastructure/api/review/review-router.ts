@@ -9,11 +9,6 @@ const reviewController = new ReviewController(reviewCases);
 
 const router = Router();
 
-router.get(
-  '/:movieId',
-  reviewController.getReviewsByMovieId.bind(reviewController)
-);
-
 router.post('/', reviewController.createReview.bind(reviewController));
 
 export { router as reviewRouter };

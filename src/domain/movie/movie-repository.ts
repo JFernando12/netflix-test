@@ -2,7 +2,7 @@ import { MovieCreateDto, MovieUpdateDto } from './movie-dto';
 import { Movie } from './movie-entity';
 
 export interface MovieRepository {
-  getMovies(): Promise<Movie[] | null>;
+  getMovies(params: { skip?: number; limit?: number }): Promise<Movie[] | null>;
   getMovieById(id: string): Promise<Movie | null>;
   createMovie(movie: MovieCreateDto): Promise<Movie | null>;
   updateMovie(id: string, movie: MovieUpdateDto): Promise<Movie | null>;

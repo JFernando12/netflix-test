@@ -7,9 +7,8 @@ export interface MovieAttrs {
   slug: string;
   image: string;
   director: string;
-  platforms: PlatformDoc[];
-  score: number;
-  reviews: ReviewDoc[];
+  platforms: PlatformDoc['id'][] | PlatformDoc[];
+  reviews: ReviewDoc['id'][] | ReviewDoc[];
 }
 
 export interface MovieDoc extends mongoose.Document {
@@ -17,9 +16,9 @@ export interface MovieDoc extends mongoose.Document {
   slug: string;
   image: string;
   director: string;
-  platforms: PlatformDoc[];
+  platforms: PlatformDoc['id'][] | PlatformDoc[];
   score: number;
-  reviews: ReviewDoc[];
+  reviews: ReviewDoc['id'][] | ReviewDoc[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -51,16 +50,16 @@ const movieSchema = new mongoose.Schema(
         ref: 'Platform',
       },
     ],
-    score: {
-      type: Number,
-      required: true,
-    },
     reviews: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review',
       },
     ],
+    score: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
@@ -72,6 +71,21 @@ const movieSchema = new mongoose.Schema(
     },
   }
 );
+
+movieSchema.pre<MovieDoc>('save', async function (next) {
+  const reviewScores: number[] = (
+    (await this.populate('reviews')).reviews as ReviewDoc[]
+  ).map((review) => review.score);
+
+  if (reviewScores.length === 0) {
+    this.score = 0;
+  } else {
+    const totalScore = reviewScores.reduce((acc, score) => acc + score, 0);
+    this.score = parseFloat((totalScore / reviewScores.length).toFixed(1));
+  }
+
+  next();
+});
 
 movieSchema.statics.build = (attrs: MovieAttrs) => {
   return new Movie(attrs);

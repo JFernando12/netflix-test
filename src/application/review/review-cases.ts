@@ -6,10 +6,6 @@ export class ReviewCases {
     this.reviewRepository = reviewRepository;
   }
 
-  async getReviewsByMovieId(movieId: string) {
-    return await this.reviewRepository.getReviewsByMovieId(movieId);
-  }
-
   async createReview(reviewCreateDto: ReviewCreateDto) {
     return await this.reviewRepository.createReview(reviewCreateDto);
   }

@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import { PlatformMongoRepository } from './platform-mongo-repository';
 import { PlatformCases } from '../../../application/platform/platform-cases';
 import { PlatformController } from './platform-controller';

@@ -4,8 +4,8 @@ import { MovieRepository } from '../../domain/movie/movie-repository';
 export class MovieCases {
   constructor(private readonly movieRepository: MovieRepository) {}
 
-  async getMovies() {
-    return await this.movieRepository.getMovies();
+  async getMovies(params: { skip?: number; limit?: number }) {
+    return await this.movieRepository.getMovies(params);
   }
 
   async getMovieById(id: string) {

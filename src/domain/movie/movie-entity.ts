@@ -8,7 +8,7 @@ export class Movie {
     readonly slug: string,
     readonly image: string,
     readonly director: string,
-    readonly platforms: Platform[],
+    readonly platforms: Platform['id'][] | Platform[],
     readonly score: number,
     readonly reviews: Review['id'][] | { [platform: string]: Review[] },
     readonly createdAt: Date,
