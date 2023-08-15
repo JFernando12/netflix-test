@@ -1,4 +1,4 @@
-# Netflix Backen Test
+# Netflix Backend Test
 
 The objective of the technical test is to create a RESTful API where you can create movies and give reviews of them.
 
