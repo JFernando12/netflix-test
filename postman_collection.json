@@ -1,0 +1,1918 @@
+{
+	"info": {
+		"_postman_id": "f2fd6231-8cbc-4995-917f-c732e97a888a",
+		"name": "netflix-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20224033",
+		"_collection_link": "https://warped-meteor-786352.postman.co/workspace/New-Team-Workspace~76c05972-8c98-41c2-af8d-bce745339cc0/collection/20224033-f2fd6231-8cbc-4995-917f-c732e97a888a?action=share&source=collection_link&creator=20224033"
+	},
+	"item": [
+		{
+			"name": "platform",
+			"item": [
+				{
+					"name": "createPlatform",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Amazon",
+									"type": "text"
+								},
+								{
+									"key": "icon",
+									"type": "file",
+									"src": "5toz9h0B6/amazon-icon.png"
+								}
+							]
+						},
+						"url": "https://netflix-backend-ufrx.onrender.com/platform"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Netflix",
+											"type": "text"
+										},
+										{
+											"key": "icon",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/netflix-icon.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/platform"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "266"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10a-yoXsjhrTEbEp+JiKO8HO7/Rs6tI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 19:37:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":201,\"message\":\"Successfully created\",\"data\":{\"id\":\"64da827468f6104c1c0b4361\",\"icon\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/netflix-icon.jpg\",\"title\":\"Netflix\",\"createdAt\":\"2023-08-14T19:37:24.008Z\",\"updatedAt\":\"2023-08-14T19:37:24.008Z\"}}"
+						},
+						{
+							"name": "required-value",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Netflix",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/platform"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-dgmNdk4j+agsMWoT0cR4hvIu1kI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 19:26:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Icon is required\"}"
+						}
+					]
+				},
+				{
+					"name": "getPlatforms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://netflix-backend-ufrx.onrender.com/platform"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/platform"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "684"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ac-pyTneMYyubmX3MLAzvYN2qtN+Tc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:45:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"message\":\"Successfully processed\",\"data\":[{\"id\":\"64dabb9250f0173ce2f97dc5\",\"icon\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/hbo-icon.png\",\"title\":\"HBO\",\"createdAt\":\"2023-08-14T23:41:06.795Z\",\"updatedAt\":\"2023-08-14T23:41:06.795Z\"},{\"id\":\"64dabbaa50f0173ce2f97dc7\",\"icon\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/netflix-icon.jpg\",\"title\":\"Netflix\",\"createdAt\":\"2023-08-14T23:41:30.428Z\",\"updatedAt\":\"2023-08-14T23:41:30.428Z\"},{\"id\":\"64dabbc550f0173ce2f97dc9\",\"icon\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/amazon-icon.png\",\"title\":\"Amazon\",\"createdAt\":\"2023-08-14T23:41:57.533Z\",\"updatedAt\":\"2023-08-14T23:41:57.533Z\"}]}"
+						}
+					]
+				},
+				{
+					"name": "deletePlatform",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://netflix-backend-ufrx.onrender.com/platform/64dae3088520a66022cbc473"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/platform/64dabbc550f0173ce2f97dc9"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "264"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"108-fQOgCIS/dw9Vb2fNQiy/wKoW6L8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:45:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"message\":\"Successfully deleted\",\"data\":{\"id\":\"64dabbc550f0173ce2f97dc9\",\"icon\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/amazon-icon.png\",\"title\":\"Amazon\",\"createdAt\":\"2023-08-14T23:41:57.533Z\",\"updatedAt\":\"2023-08-14T23:41:57.533Z\"}}"
+						},
+						{
+							"name": "not-found-platform",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/platform/64da81251835e7d90919a184"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-jERU0zasm0NJYNiYIC0JQMRamHQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:42:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Platform not found\"}"
+						},
+						{
+							"name": "invalid-id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/platform/64da812518"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-Z11nyhVzZTtjPy/rnerQ3Qe3L/U\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:44:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Platform ID is required\"}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "movie",
+			"item": [
+				{
+					"name": "createMovie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Equipo/Descargas/the-perfect-game.jpg"
+								},
+								{
+									"key": "title",
+									"value": "The Perfect Game",
+									"type": "text"
+								},
+								{
+									"key": "director",
+									"value": "Fernando Castrejon",
+									"type": "text"
+								},
+								{
+									"key": "platforms",
+									"value": "[\"64dabb9250f0173ce2f97dc5\", \"64dabbaa50f0173ce2f97dc7\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://netflix-backend-ufrx.onrender.com/movie"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										},
+										{
+											"key": "title",
+											"value": "Spiderman 2",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Castrejon",
+											"type": "text"
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da827468f6104c1c0b4361\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text"
+										}
+									]
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "414"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19e-aKOEbj1qAYV1uO1khrFZ6nsSa7c\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 21:16:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":201,\"message\":\"Successfully created\",\"data\":{\"id\":\"64da999608eb82b86ed1ac07\",\"title\":\"Spiderman 2\",\"slug\":\"spiderman-2\",\"image\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/spiderman-2.png\",\"director\":\"Fernando Castrejon\",\"platforms\":[\"64da827468f6104c1c0b4361\",\"64da995008eb82b86ed1ac02\"],\"score\":0,\"reviews\":{},\"createdAt\":\"2023-08-14T21:16:06.741Z\",\"updatedAt\":\"2023-08-14T21:16:06.741Z\"}}"
+						},
+						{
+							"name": "invalid-platform-ids",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										},
+										{
+											"key": "title",
+											"value": "Spiderman 2",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Castrejon",
+											"type": "text"
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da827468f6104c1c0b4361\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-6CONSy/KJ8QzcJbR4vhFVxdr6ns\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 21:22:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Invalid platform IDs\"}"
+						},
+						{
+							"name": "required-value",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										},
+										{
+											"key": "title",
+											"value": "Spiderman 2",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Castrejon",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da827468f6104c1c0b4361\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text"
+										}
+									]
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-lvPDZHW2apvKGi7XcxsB/5ye/is\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:53:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Director is required\"}"
+						},
+						{
+							"name": "not-found-platforms",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										},
+										{
+											"key": "title",
+											"value": "Spiderman 2",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Castrejon",
+											"type": "text"
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da827468f6104c1c0b4361\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text"
+										}
+									]
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-EO+dAer2PmYSD29ClCySydlh6y0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:53:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Platforms not found, please check ids\"}"
+						}
+					]
+				},
+				{
+					"name": "getMovies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://netflix-backend-ufrx.onrender.com/movie?offset=0&limit=2",
+							"protocol": "https",
+							"host": [
+								"netflix-backend-ufrx",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"movie"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://netflix-backend-ufrx.onrender.com/movie?offset=0&limit=2",
+									"protocol": "https",
+									"host": [
+										"netflix-backend-ufrx",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"movie"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "869"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"365-c5WSWu47AqtuLMaq+dz5/OPUils\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:28:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"message\":\"Successfully processed\",\"offset\":0,\"limit\":2,\"data\":[{\"id\":\"64da86ee3868e1f264e1e8b6\",\"title\":\"The Perfect Game\",\"slug\":\"the-perfect-game\",\"image\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/the-perfect-game.jpg\",\"director\":\"Fernando Castrejon\",\"platforms\":[\"64da827468f6104c1c0b4361\"],\"score\":0,\"reviews\":[],\"createdAt\":\"2023-08-14T19:56:31.001Z\",\"updatedAt\":\"2023-08-14T19:56:31.001Z\"},{\"id\":\"64da999608eb82b86ed1ac07\",\"title\":\"Spiderman 2\",\"slug\":\"spiderman-2\",\"image\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/spiderman-2.png\",\"director\":\"Fernando Hernandez\",\"platforms\":[\"64da827468f6104c1c0b4361\",\"64da995008eb82b86ed1ac02\"],\"score\":3.3,\"reviews\":[\"64da99e308eb82b86ed1ac0b\",\"64da9a2e08eb82b86ed1ac11\",\"64da9a5508eb82b86ed1ac16\"],\"createdAt\":\"2023-08-14T21:16:06.741Z\",\"updatedAt\":\"2023-08-14T21:39:06.542Z\"}]}"
+						},
+						{
+							"name": "invalid-params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://netflix-backend-ufrx.onrender.com/movie?offset=0&limit=a",
+									"protocol": "https",
+									"host": [
+										"netflix-backend-ufrx",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"movie"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "a"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-rn0Hn44yt/ejLbuXE1iaDr5jvgw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:57:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Limit must be a number\"}"
+						}
+					]
+				},
+				{
+					"name": "deleteMovie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://netflix-backend-ufrx.onrender.com/movie/64dac3687c206d7b0754ba71"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64dac3687c206d7b0754ba71"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "429"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ad-oZeKhQTLDgvHAJJz2XnDTu4BTco\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 01:06:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"message\":\"Successfully deleted\",\"data\":{\"id\":\"64dac3687c206d7b0754ba71\",\"title\":\"The Perfect Game\",\"slug\":\"the-perfect-game\",\"image\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/the-perfect-game.jpg\",\"director\":\"Fernando Castrejon\",\"platforms\":[\"64dabb9250f0173ce2f97dc5\",\"64dabbaa50f0173ce2f97dc7\"],\"score\":0,\"reviews\":[],\"createdAt\":\"2023-08-15T00:14:32.827Z\",\"updatedAt\":\"2023-08-15T00:14:32.827Z\"}}"
+						},
+						{
+							"name": "invalid-id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64da5e4925bfa4b805"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-5MG8zvxjvwCbN6zZ5qo74VWdG+8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 18:24:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Movie ID is required\"}"
+						},
+						{
+							"name": "not-found-movie",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64dac3687c206d7b0754ba72"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-mfaFv1o+JmfMCuoqKRsO6aAXFGA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 01:06:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Movie not found\"}"
+						}
+					]
+				},
+				{
+					"name": "getMovieById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://netflix-backend-ufrx.onrender.com/movie/64dabf4550f0173ce2f97dd7"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64da999608eb82b86ed1ac07"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1530"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5fa-92OvWEcy3yudkJYkAOsynuFoXZQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 21:23:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"message\":\"Successfully processed\",\"data\":{\"id\":\"64da999608eb82b86ed1ac07\",\"title\":\"Spiderman 2\",\"slug\":\"spiderman-2\",\"image\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/spiderman-2.png\",\"director\":\"Fernando Castrejon\",\"platforms\":[{\"icon\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/netflix-icon.jpg\",\"title\":\"Netflix\",\"createdAt\":\"2023-08-14T19:37:24.008Z\",\"updatedAt\":\"2023-08-14T19:37:24.008Z\",\"__v\":0,\"id\":\"64da827468f6104c1c0b4361\"},{\"icon\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/hbo-icon.png\",\"title\":\"HBO\",\"createdAt\":\"2023-08-14T21:14:56.383Z\",\"updatedAt\":\"2023-08-14T21:14:56.383Z\",\"__v\":0,\"id\":\"64da995008eb82b86ed1ac02\"}],\"score\":3.3,\"reviews\":{\"Netflix\":[{\"id\":\"64da99e308eb82b86ed1ac0b\",\"movie\":\"64da999608eb82b86ed1ac07\",\"platform\":\"64da827468f6104c1c0b4361\",\"author\":\"Gicel Gamino\",\"body\":\"Muy buena\",\"score\":4,\"createdAt\":\"2023-08-14T21:17:23.430Z\",\"updatedAt\":\"2023-08-14T21:17:23.430Z\"},{\"id\":\"64da9a2e08eb82b86ed1ac11\",\"movie\":\"64da999608eb82b86ed1ac07\",\"platform\":\"64da827468f6104c1c0b4361\",\"author\":\"Jose Gamino\",\"body\":\"Excelente\",\"score\":3,\"createdAt\":\"2023-08-14T21:18:38.435Z\",\"updatedAt\":\"2023-08-14T21:18:38.435Z\"}],\"HBO\":[{\"id\":\"64da9a5508eb82b86ed1ac16\",\"movie\":\"64da999608eb82b86ed1ac07\",\"platform\":\"64da995008eb82b86ed1ac02\",\"author\":\"Luis Hernandez\",\"body\":\"Muy padre\",\"score\":3,\"createdAt\":\"2023-08-14T21:19:17.160Z\",\"updatedAt\":\"2023-08-14T21:19:17.160Z\"}]},\"createdAt\":\"2023-08-14T21:16:06.741Z\",\"updatedAt\":\"2023-08-14T21:19:17.245Z\"}}"
+						},
+						{
+							"name": "invalid-id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64da5e4925bfa4b8"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-5MG8zvxjvwCbN6zZ5qo74VWdG+8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:24:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Movie ID is required\"}"
+						},
+						{
+							"name": "not-found-movie",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64da999608eb82b86ed1ac07"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-mfaFv1o+JmfMCuoqKRsO6aAXFGA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 23:59:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Movie not found\"}"
+						}
+					]
+				},
+				{
+					"name": "updateMovie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Spiderman 2",
+									"type": "text"
+								},
+								{
+									"key": "director",
+									"value": "Fernando Hernandez",
+									"type": "text"
+								},
+								{
+									"key": "platforms",
+									"value": "[\"64dabb9250f0173ce2f97dc5\", \"64dabbaa50f0173ce2f97dc7\"]",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Equipo/Descargas/spiderman-2.png"
+								}
+							]
+						},
+						"url": "https://netflix-backend-ufrx.onrender.com/movie/64dabefb50f0173ce2f97dd4"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Spiderman 2",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Hernandez",
+											"type": "text"
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da827468f6104c1c0b4361\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64da999608eb82b86ed1ac07"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "496"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f0-GLFy54wJ0AUE6qUgzNtqSbTEOSU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 21:36:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"message\":\"Successfully updated\",\"data\":{\"id\":\"64da999608eb82b86ed1ac07\",\"title\":\"Spiderman 2\",\"slug\":\"spiderman-2\",\"image\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/spiderman-2.png\",\"director\":\"Fernando Hernandez\",\"platforms\":[\"64da827468f6104c1c0b4361\",\"64da995008eb82b86ed1ac02\"],\"score\":3.3,\"reviews\":[\"64da99e308eb82b86ed1ac0b\",\"64da9a2e08eb82b86ed1ac11\",\"64da9a5508eb82b86ed1ac16\"],\"createdAt\":\"2023-08-14T21:16:06.741Z\",\"updatedAt\":\"2023-08-14T21:36:02.960Z\"}}"
+						},
+						{
+							"name": "not-found-movie",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Spiderman 2",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Hernandez",
+											"type": "text"
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da827468f6104c1c0b4361\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										}
+									]
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64da999608eb82b86ed1ac07"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-mfaFv1o+JmfMCuoqKRsO6aAXFGA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:02:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Movie not found\"}"
+						},
+						{
+							"name": "invalid-platform-ids",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Spiderman 2",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Hernandez",
+											"type": "text"
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da82746\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64da999608eb82b86ed1ac07"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-6CONSy/KJ8QzcJbR4vhFVxdr6ns\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 21:38:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Invalid platform IDs\"}"
+						},
+						{
+							"name": "not-found-platforms",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Spiderman 3",
+											"type": "text"
+										},
+										{
+											"key": "director",
+											"value": "Fernando Hernandez",
+											"type": "text"
+										},
+										{
+											"key": "platforms",
+											"value": "[\"64da827468f6104c1c0b4361\", \"64da995008eb82b86ed1ac02\"]",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Equipo/Descargas/spiderman-2.png"
+										}
+									]
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/64dabefb50f0173ce2f97dd4"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-EO+dAer2PmYSD29ClCySydlh6y0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:05:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Platforms not found, please check ids\"}"
+						}
+					]
+				},
+				{
+					"name": "cloneMovie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "https://netflix-backend-ufrx.onrender.com/movie/clone/64dabf4550f0173ce2f97dd7"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/clone/64dabf4550f0173ce2f97dd7"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "428"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ac-cQbgHGxt8dRe4gxvDSoiq7xI45s\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:14:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"message\":\"Successfully cloned\",\"data\":{\"id\":\"64dac3687c206d7b0754ba71\",\"title\":\"The Perfect Game\",\"slug\":\"the-perfect-game\",\"image\":\"https://netflix-backend-test.s3.us-east-1.amazonaws.com/the-perfect-game.jpg\",\"director\":\"Fernando Castrejon\",\"platforms\":[\"64dabb9250f0173ce2f97dc5\",\"64dabbaa50f0173ce2f97dc7\"],\"score\":0,\"reviews\":{},\"createdAt\":\"2023-08-15T00:14:32.827Z\",\"updatedAt\":\"2023-08-15T00:14:32.827Z\"}}"
+						},
+						{
+							"name": "not-found-movie",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "https://netflix-backend-ufrx.onrender.com/movie/clone/64da6de6e7ab574bd6fa186a"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-mfaFv1o+JmfMCuoqKRsO6aAXFGA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:08:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Movie not found\"}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "review",
+			"item": [
+				{
+					"name": "createReview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movie\": \"64dabf4550f0173ce2f97dd7\",\r\n    \"platform\": \"64dabbaa50f0173ce2f97dc7\",\r\n    \"author\": \"Gicel Gamino\",\r\n    \"body\": \"Exelente\",\r\n    \"score\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://netflix-backend-ufrx.onrender.com/review"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"movie\": \"64dabf4550f0173ce2f97dd7\",\r\n    \"platform\": \"64dabb9250f0173ce2f97dc5\",\r\n    \"author\": \"Luis Hernandez\",\r\n    \"body\": \"Muy padre\",\r\n    \"score\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/review"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "294"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"126-4IXnwtxzNAo7GzlCOW9p/JIPQaA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:11:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":201,\"message\":\"Successfully created\",\"data\":{\"id\":\"64dac2c77c206d7b0754ba5c\",\"movie\":\"64dabf4550f0173ce2f97dd7\",\"platform\":\"64dabb9250f0173ce2f97dc5\",\"author\":\"Luis Hernandez\",\"body\":\"Muy padre\",\"score\":3,\"createdAt\":\"2023-08-15T00:11:51.254Z\",\"updatedAt\":\"2023-08-15T00:11:51.254Z\"}}"
+						},
+						{
+							"name": "not-found-movie",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"movie\": \"64da999608eb82b86ed1ac07\",\r\n    \"platform\": \"64da995008eb82b86ed1ac02\",\r\n    \"author\": \"Luis Hernandez\",\r\n    \"body\": \"Muy padre\",\r\n    \"score\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/review"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-mfaFv1o+JmfMCuoqKRsO6aAXFGA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:10:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Movie not found\"}"
+						},
+						{
+							"name": "not-found-platform",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"movie\": \"64dabf4550f0173ce2f97dd7\",\r\n    \"platform\": \"64da995008eb82b86ed1ac02\",\r\n    \"author\": \"Luis Hernandez\",\r\n    \"body\": \"Muy padre\",\r\n    \"score\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/review"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-jERU0zasm0NJYNiYIC0JQMRamHQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:11:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":404,\"message\":\"Platform not found\"}"
+						},
+						{
+							"name": "required-value",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"movie\": \"64dabf4550f0173ce2f97dd7\",\r\n    \"platform\": \"64dabbaa50f0173ce2f97dc7\",\r\n    \"author\": \"Gicel Gamino\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/review"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-v4gbzAfRR3aIXhgjlzV9WE+kzm0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:16:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Body is required\"}"
+						},
+						{
+							"name": "invalid-score",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"movie\": \"64dabf4550f0173ce2f97dd7\",\r\n    \"platform\": \"64dabbaa50f0173ce2f97dc7\",\r\n    \"author\": \"Gicel Gamino\",\r\n    \"body\": \"Exelente\",\r\n    \"score\": 6\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://netflix-backend-ufrx.onrender.com/review"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-2n5URchcG1sHb7sMcLZ3Ht/QQ20\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 00:16:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":400,\"message\":\"Score must be between 0 and 5\"}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
