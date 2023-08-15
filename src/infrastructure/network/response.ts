@@ -6,7 +6,7 @@ const success = (
   status: number,
   data: unknown,
   message?: string,
-  options?: { offset?: number; limit?: number; count?: number }
+  options?: { offset?: number; limit?: number }
 ) => {
   const statusCode = status || 200;
   const statusMessage = message || '';

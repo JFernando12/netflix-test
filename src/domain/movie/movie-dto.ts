@@ -1,5 +1,4 @@
 export interface MovieCreateDto {
-  id: string;
   title: string;
   image: string;
   director: string;

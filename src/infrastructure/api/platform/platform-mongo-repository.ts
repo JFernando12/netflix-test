@@ -1,8 +1,9 @@
 import { Platform, PlatformRepository } from '../../../domain/platform';
+import { ElementNotFoundError } from '../../errors';
 import { PlatformMongo } from './platform-mongo-model';
 
 export class PlatformMongoRepository implements PlatformRepository {
-  async getPlatforms(): Promise<Platform[] | null> {
+  async getPlatforms(): Promise<Platform[]> {
     const platforms = await PlatformMongo.find();
 
     const platformsList = platforms.map((platform) => {
@@ -18,7 +19,7 @@ export class PlatformMongoRepository implements PlatformRepository {
     return platformsList;
   }
 
-  async createPlatform(platform: Platform): Promise<Platform | null> {
+  async createPlatform(platform: Platform): Promise<Platform> {
     const newPlatform = PlatformMongo.build(platform);
     await newPlatform.save();
 
@@ -31,11 +32,11 @@ export class PlatformMongoRepository implements PlatformRepository {
     };
   }
 
-  async deletePlatform(id: string): Promise<Platform | null> {
+  async deletePlatform(id: string): Promise<Platform> {
     const platform = await PlatformMongo.findByIdAndDelete(id);
 
     if (!platform) {
-      return null;
+      throw new ElementNotFoundError('Platform not found');
     }
 
     return {

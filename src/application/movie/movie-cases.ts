@@ -4,7 +4,7 @@ import { MovieRepository } from '../../domain/movie/movie-repository';
 export class MovieCases {
   constructor(private readonly movieRepository: MovieRepository) {}
 
-  async getMovies(params: { skip?: number; limit?: number }) {
+  async getMovies(params: { offset: number; limit: number }) {
     return await this.movieRepository.getMovies(params);
   }
 

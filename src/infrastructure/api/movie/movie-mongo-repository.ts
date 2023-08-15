@@ -5,21 +5,16 @@ import {
   MovieUpdateDto,
 } from '../../../domain/movie';
 import { Review } from '../../../domain/review';
+import { ElementNotFoundError } from '../../errors';
 import { PlatformMongo } from '../platform/platform-mongo-model';
 import { ReviewDoc } from '../review/review-mongo-model';
 import { MovieMongo } from './movie-mongo-model';
 
 export class MovieMongoRepository implements MovieRepository {
-  async getMovies(params: {
-    skip?: number;
-    limit?: number;
-  }): Promise<Movie[] | null> {
-    const defaultSkip = 0;
-    const defaultLimit = 100;
-
+  async getMovies(params: { offset: number; limit: number }): Promise<Movie[]> {
     const movies = await MovieMongo.find()
-      .skip(params.skip || defaultSkip)
-      .limit(params.limit || defaultLimit);
+      .skip(params.offset)
+      .limit(params.limit);
 
     const moviesList = movies.map((movie) => {
       return {
@@ -39,19 +34,17 @@ export class MovieMongoRepository implements MovieRepository {
     return moviesList;
   }
 
-  async getMovieById(id: string): Promise<Movie | null> {
+  async getMovieById(id: string): Promise<Movie> {
     const movie = await MovieMongo.findById(id)
       .populate('platforms')
       .populate('reviews');
 
     if (!movie) {
-      return null;
+      throw new ElementNotFoundError('Movie not found');
     }
 
     const reviewsByPlatform: { [platform: string]: Review[] } = {};
-
     const reviews = movie.reviews as ReviewDoc[];
-
     for (const platform of movie.platforms) {
       const currentReviews = reviews.filter(
         (review) => review.platform.toString() === platform._id.toString()
@@ -85,13 +78,13 @@ export class MovieMongoRepository implements MovieRepository {
     };
   }
 
-  async createMovie(movieCreateDto: MovieCreateDto): Promise<Movie | null> {
+  async createMovie(movieCreateDto: MovieCreateDto): Promise<Movie> {
     const platforms = await PlatformMongo.find({
       _id: { $in: movieCreateDto.platforms },
     });
 
     if (platforms.length !== movieCreateDto.platforms.length) {
-      return null;
+      throw new ElementNotFoundError('Platforms not found, please check ids');
     }
 
     const slug = movieCreateDto.title
@@ -105,7 +98,6 @@ export class MovieMongoRepository implements MovieRepository {
       image: movieCreateDto.image,
       director: movieCreateDto.director,
       platforms: movieCreateDto.platforms,
-      reviews: [],
     };
 
     const newMovie = MovieMongo.build(data);
@@ -128,24 +120,39 @@ export class MovieMongoRepository implements MovieRepository {
   async updateMovie(
     id: string,
     movieUpdateDto: MovieUpdateDto
-  ): Promise<Movie | null> {
+  ): Promise<Movie> {
     const movie = await MovieMongo.findById(id);
 
     if (!movie) {
-      return null;
+      throw new ElementNotFoundError('Movie not found');
     }
 
-    const platforms = await PlatformMongo.find({
-      id: { $in: movieUpdateDto.platforms },
-    });
+    const platforms = movieUpdateDto.platforms
+      ? await PlatformMongo.find({
+          _id: { $in: movieUpdateDto.platforms },
+        })
+      : [];
 
-    movie.set({
-      title: movieUpdateDto.title,
-      image: movieUpdateDto.image,
-      director: movieUpdateDto.director,
-      platforms: platforms,
-    });
+    if (platforms.length !== movieUpdateDto.platforms?.length) {
+      throw new ElementNotFoundError('Platforms not found, please check ids');
+    }
 
+    const newData = {
+      ...(movieUpdateDto?.title && { title: movieUpdateDto.title }),
+      ...(movieUpdateDto?.image && { image: movieUpdateDto.image }),
+      ...(movieUpdateDto?.director && { director: movieUpdateDto.director }),
+      ...(movieUpdateDto?.platforms && {
+        platforms: platforms.map((platform) => platform._id),
+      }),
+      ...(movieUpdateDto?.title && {
+        slug: movieUpdateDto.title
+          .toLocaleLowerCase()
+          .replace(/ /g, '-')
+          .replace(/:/g, ''),
+      }),
+    };
+
+    movie.set(newData);
     await movie.save();
 
     return {
@@ -154,19 +161,19 @@ export class MovieMongoRepository implements MovieRepository {
       slug: movie.slug,
       image: movie.image,
       director: movie.director,
-      platforms: [],
+      platforms: movie.platforms as string[],
       score: movie.score,
-      reviews: [],
+      reviews: movie.reviews as string[],
       createdAt: movie.createdAt,
       updatedAt: movie.updatedAt,
     };
   }
 
-  async deleteMovie(id: string): Promise<Movie | null> {
+  async deleteMovie(id: string): Promise<Movie> {
     const movie = await MovieMongo.findByIdAndDelete(id);
 
     if (!movie) {
-      return null;
+      throw new ElementNotFoundError('Movie not found');
     }
 
     return {
@@ -175,19 +182,19 @@ export class MovieMongoRepository implements MovieRepository {
       slug: movie.slug,
       image: movie.image,
       director: movie.director,
-      platforms: [],
+      platforms: movie.platforms as string[],
       score: movie.score,
-      reviews: [],
+      reviews: movie.reviews as string[],
       createdAt: movie.createdAt,
       updatedAt: movie.updatedAt,
     };
   }
 
-  async cloneMovie(id: string): Promise<Movie | null> {
+  async cloneMovie(id: string): Promise<Movie> {
     const movie = await MovieMongo.findById(id);
 
     if (!movie) {
-      return null;
+      throw new ElementNotFoundError('Movie not found');
     }
 
     const data = {
@@ -196,8 +203,6 @@ export class MovieMongoRepository implements MovieRepository {
       image: movie.image,
       director: movie.director,
       platforms: movie.platforms,
-      score: movie.score,
-      reviews: movie.reviews,
     };
 
     const newMovie = MovieMongo.build(data);
@@ -209,9 +214,9 @@ export class MovieMongoRepository implements MovieRepository {
       slug: newMovie.slug,
       image: newMovie.image,
       director: newMovie.director,
-      platforms: [],
+      platforms: newMovie.platforms as string[],
       score: newMovie.score,
-      reviews: [],
+      reviews: {},
       createdAt: newMovie.createdAt,
       updatedAt: newMovie.updatedAt,
     };

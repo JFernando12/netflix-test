@@ -1,89 +1,156 @@
 import { Request, Response } from 'express';
+import mongoose from 'mongoose';
 import { MovieCases } from '../../../application/movie/movie-cases';
-import response from '../../../shared/network/response';
-import { MovieCreateDto } from '../../../domain/movie';
+import response from '../../network/response';
+import { MovieCreateDto, MovieUpdateDto } from '../../../domain/movie';
 
 export class MovieController {
   constructor(private readonly movieCases: MovieCases) {}
 
   async getMovies(req: Request, res: Response) {
-    try {
-      const { skip, limit } = req.query;
+    const { offset, limit } = req.query;
 
-      const params = {
-        skip: skip ? Number(skip) : undefined,
-        limit: limit ? Number(limit) : undefined,
-      };
-
-      const movies = await this.movieCases.getMovies(params);
-      response.success(req, res, 200, movies);
-    } catch (error) {
-      console.log(error);
-      response.error(req, res, 500, 'Internal server error');
+    if (offset && isNaN(Number(offset))) {
+      return response.error(req, res, 400, 'Offset must be a number');
     }
+
+    if (limit && isNaN(Number(limit))) {
+      return response.error(req, res, 400, 'Limit must be a number');
+    }
+
+    const params = {
+      offset: offset ? Number(offset) : 0,
+      limit: limit ? Number(limit) : 20,
+    };
+
+    const movies = await this.movieCases.getMovies(params);
+    response.success(req, res, 200, movies, 'Successfully processed', params);
   }
 
   async getMovieById(req: Request, res: Response) {
-    try {
-      const movie = await this.movieCases.getMovieById(req.params.id);
-      response.success(req, res, 200, movie);
-    } catch (error) {
-      response.error(req, res, 500, 'Internal server error');
+    const movieId = req.params.id;
+
+    if (!movieId || !mongoose.Types.ObjectId.isValid(movieId)) {
+      return response.error(req, res, 400, 'Movie ID is required');
     }
+
+    const movie = await this.movieCases.getMovieById(movieId);
+    response.success(req, res, 200, movie, 'Successfully processed');
   }
 
   async createMovie(req: Request, res: Response) {
-    try {
-      const body: MovieCreateDto = req.body;
+    const body = req.body;
+    const file = req.file as Express.MulterS3.File;
+    const image = file?.location;
 
-      if (!body.title) {
-        return response.error(req, res, 400, 'Title is required');
-      }
-
-      if (!body.image) {
-        return response.error(req, res, 400, 'Image is required');
-      }
-
-      if (!body.director) {
-        return response.error(req, res, 400, 'Director is required');
-      }
-
-      if (!body.platforms) {
-        return response.error(req, res, 400, 'Platforms is required');
-      }
-
-      const movie = await this.movieCases.createMovie(body);
-      response.success(req, res, 201, movie);
-    } catch (error) {
-      console.log(error);
-      response.error(req, res, 500, 'Internal server error');
+    if (!image) {
+      return response.error(req, res, 400, 'Image is required');
     }
+
+    if (!body.title) {
+      return response.error(req, res, 400, 'Title is required');
+    }
+
+    if (!body.director) {
+      return response.error(req, res, 400, 'Director is required');
+    }
+
+    const platformsParsed = body.platforms
+      ? JSON.parse(body.platforms)
+      : undefined;
+    if (!Array.isArray(platformsParsed)) {
+      return response.error(req, res, 400, 'Invalid platform IDs');
+    }
+
+    const ObjectId = mongoose.Types.ObjectId;
+    const isValidPlatformIds = platformsParsed.every(
+      (
+        platformId:
+          | string
+          | number
+          | mongoose.mongo.BSON.ObjectId
+          | mongoose.mongo.BSON.ObjectIdLike
+          | Uint8Array
+      ) => ObjectId.isValid(platformId)
+    );
+    if (!isValidPlatformIds) {
+      return response.error(req, res, 400, 'Invalid platform IDs');
+    }
+
+    const data: MovieCreateDto = {
+      image,
+      title: body.title,
+      director: body.director,
+      platforms: platformsParsed,
+    };
+
+    const movie = await this.movieCases.createMovie(data);
+    response.success(req, res, 201, movie, 'Successfully created');
   }
 
   async updateMovie(req: Request, res: Response) {
-    try {
-      const movie = await this.movieCases.updateMovie(req.params.id, req.body);
-      response.success(req, res, 200, movie);
-    } catch (error) {
-      response.error(req, res, 500, 'Internal server error');
+    const movieId = req.params.id;
+    const body = req.body;
+    const file = req.file as Express.MulterS3.File;
+    const image = file?.location;
+
+    if (!movieId || !mongoose.Types.ObjectId.isValid(movieId)) {
+      return response.error(req, res, 400, 'Movie ID is required');
     }
+
+    const platformsParsed = body.platforms
+      ? JSON.parse(body.platforms)
+      : undefined;
+    if (platformsParsed && !Array.isArray(platformsParsed)) {
+      return response.error(req, res, 400, 'Invalid platform IDs');
+    }
+
+    if (platformsParsed) {
+      const ObjectId = mongoose.Types.ObjectId;
+      const isValidPlatformIds = platformsParsed.every(
+        (
+          platformId:
+            | string
+            | number
+            | mongoose.mongo.BSON.ObjectId
+            | mongoose.mongo.BSON.ObjectIdLike
+            | Uint8Array
+        ) => ObjectId.isValid(platformId)
+      );
+      if (!isValidPlatformIds) {
+        return response.error(req, res, 400, 'Invalid platform IDs');
+      }
+    }
+
+    const data: MovieUpdateDto = {
+      image,
+      ...body,
+      platforms: platformsParsed,
+    };
+
+    const movie = await this.movieCases.updateMovie(req.params.id, data);
+    response.success(req, res, 200, movie, 'Successfully updated');
   }
 
   async deleteMovie(req: Request, res: Response) {
-    try {
-      const movie = await this.movieCases.deleteMovie(req.params.id);
-      response.success(req, res, 200, movie);
-    } catch (error) {
-      response.error(req, res, 500, 'Internal server error');
+    const movieId = req.params.id;
+
+    if (!movieId || !mongoose.Types.ObjectId.isValid(movieId)) {
+      return response.error(req, res, 400, 'Movie ID is required');
     }
+
+    const movie = await this.movieCases.deleteMovie(movieId);
+    response.success(req, res, 200, movie, 'Successfully deleted');
   }
 
   async cloneMovie(req: Request, res: Response) {
-    try {
-      const movie = await this.movieCases.cloneMovie(req.params.id);
-      response.success(req, res, 200, movie);
-    } catch (error) {
-      response.error(req, res, 500, 'Internal server error');
+    const movieId = req.params.id;
+
+    if (!movieId || !mongoose.Types.ObjectId.isValid(movieId)) {
+      return response.error(req, res, 400, 'Movie ID is required');
     }
+
+    const movie = await this.movieCases.cloneMovie(movieId);
+    response.success(req, res, 200, movie, 'Successfully cloned');
   }
 }

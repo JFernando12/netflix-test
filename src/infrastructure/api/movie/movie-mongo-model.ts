@@ -8,7 +8,6 @@ export interface MovieAttrs {
   image: string;
   director: string;
   platforms: PlatformDoc['id'][] | PlatformDoc[];
-  reviews: ReviewDoc['id'][] | ReviewDoc[];
 }
 
 export interface MovieDoc extends mongoose.Document {
@@ -43,6 +42,7 @@ const movieSchema = new mongoose.Schema(
     },
     director: {
       type: String,
+      required: true,
     },
     platforms: [
       {
@@ -73,15 +73,17 @@ const movieSchema = new mongoose.Schema(
 );
 
 movieSchema.pre<MovieDoc>('save', async function (next) {
-  const reviewScores: number[] = (
-    (await this.populate('reviews')).reviews as ReviewDoc[]
-  ).map((review) => review.score);
+  if (this.isModified('reviews')) {
+    const reviewScores: number[] = (
+      (await this.populate('reviews')).reviews as ReviewDoc[]
+    ).map((review) => review.score);
 
-  if (reviewScores.length === 0) {
-    this.score = 0;
-  } else {
-    const totalScore = reviewScores.reduce((acc, score) => acc + score, 0);
-    this.score = parseFloat((totalScore / reviewScores.length).toFixed(1));
+    if (reviewScores.length === 0) {
+      this.score = 0;
+    } else {
+      const totalScore = reviewScores.reduce((acc, score) => acc + score, 0);
+      this.score = parseFloat((totalScore / reviewScores.length).toFixed(1));
+    }
   }
 
   next();
